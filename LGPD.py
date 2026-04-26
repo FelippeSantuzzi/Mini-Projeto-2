@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer
 from sqlalchemy import String, Date, DateTime, insert, text
-from datetime import datetime
+from datetime import datetime 
+import csv
 engine = create_engineengine = create_engine(
     "postgresql+psycopg2://alunos:AlunoFatec@200.19.224.150:5432/atividade2"
 )
@@ -20,21 +21,20 @@ metadata.create_all(engine)
 def LGPD(row):
     id, nome, cpf, email, telefone, data_nasc, created, updated = row
 
-    # Nome: só primeira letra do primeiro nome
+  
     partes_nome = nome.split()
     primeiro_nome = partes_nome[0]
     sobrenome = " ".join(partes_nome[1:]) if len(partes_nome) > 1 else ""
     nome_mask = primeiro_nome[0] + "*" * (len(primeiro_nome)-1)
     nome_final = f"{nome_mask} {sobrenome}".strip()
 
-    # CPF: manter início, mascarar resto
+   
     cpf_mask = cpf[:3] + ".***.***-**"
 
-    # Email: manter primeira letra e domínio
     user, dominio = email.split("@")
     email_mask = user[0] + "*" * (len(user)-1) + "@" + dominio
 
-    # Telefone: mostrar só final (últimos 4 dígitos)
+    
     telefone_mask = telefone[-4:]
 
     return (
@@ -50,7 +50,26 @@ def LGPD(row):
 users = []
 with engine.connect() as conn:
  result = conn.execute(text("SELECT * FROM usuarios LIMIT 10;"))
- for row in result:
-     row = LGPD(row)
-     users.append(row)
-     print(users)
+ 
+
+dados_por_ano = {}
+
+with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM usuarios LIMIT 10;"))
+
+    for row in result:
+        row = LGPD(row)
+        ano = row[5].year  # data_nascimento
+
+        if ano not in dados_por_ano:
+            dados_por_ano[ano] = []
+
+        dados_por_ano[ano].append(row)
+
+# criar arquivos CSV por ano
+for ano, registros in dados_por_ano.items():
+    with open(f"{ano}.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["id","nome","cpf","email","telefone","data_nasc","created","updated"])
+        writer.writerows(registros)
+        print(f"Arquivo {ano}.csv criado com {len(registros)} registros")
