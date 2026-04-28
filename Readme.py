@@ -1,31 +1,41 @@
 # Mini Projeto 2 - LGPD
 
-# Descrição
-Projeto em Python que acessa um banco PostgreSQL, aplica anonimização de dados e gera arquivos CSV.
+## Descrição
+
+Projeto acadêmico desenvolvido em Python para aplicar conceitos da LGPD. O sistema acessa um banco de dados PostgreSQL, realiza anonimização de dados sensíveis e gera arquivos CSV organizados.
 
 ---
 
-# Tecnologias
+## Objetivo
+
+Anonimizar dados pessoais e exportar informações organizadas por ano de nascimento, além de gerar um arquivo consolidado sem anonimização.
+
+---
+
+## Tecnologias
+
 * Python 3
 * SQLAlchemy
 * psycopg2
 
 ---
 
-# Execução
+## Execução
 
-1. Clonar repositório
+### 1. Clonar repositório
 
+```bash
 git clone <url-do-repositorio>
 cd Mini-Projeto-2
+```
 
+### 2. Criar ambiente virtual
 
-# 2. Criar ambiente virtual
-
+```bash
 python3 -m venv venv
+```
 
-
-# 3. Ativar ambiente
+### 3. Ativar ambiente
 
 Mac/Linux:
 
@@ -39,53 +49,89 @@ Windows:
 venv\Scripts\activate
 ```
 
-# 4. Instalar dependências
+### 4. Instalar dependências
 
+```bash
 pip install -r requirements.txt
+```
 
+### 5. Executar o projeto
 
-# 5. Executar
-
+```bash
 python LGPD.py
-
+```
 
 ---
 
 ## Funcionalidades
 
-## Atividade 2
+### Atividade 2
 
-* Anonimiza dados (nome, cpf, email, telefone)
-* Gera arquivos CSV por ano de nascimento
+* Anonimização de dados:
 
-## Atividade 3
+  * Nome
+  * CPF
+  * Email
+  * Telefone
+* Geração de arquivos CSV por ano de nascimento
 
-* Gera arquivo `todos.csv`
-* Contém nome e cpf sem anonimização
+### Atividade 3
 
----
-
-### Logs
-
-* Arquivo `execucao.log`
-* Registra tempo de execução das atividades
+* Geração de arquivo único `todos.csv`
+* Contém apenas nome e CPF sem anonimização
 
 ---
 
-#### Estrutura
+## Como funciona
 
+1. Conecta ao banco PostgreSQL
+2. Lê dados da tabela `usuarios`
+3. Aplica anonimização conforme regras da LGPD
+4. Agrupa os dados por ano de nascimento
+5. Gera arquivos CSV por ano
+6. Gera arquivo consolidado sem anonimização
 
+---
+
+## Monitoramento
+
+O projeto utiliza um decorador para medir o tempo de execução das atividades e registrar os resultados em log.
+
+Arquivo gerado:
+
+```
+execucao.log
+```
+
+---
+
+## Estrutura do projeto
+
+```
 Mini-Projeto-2/
 ├── LGPD.py
 ├── requirements.txt
 ├── README.md
 ├── execucao.log
 └── *.csv
-
+```
 
 ---
 
-##### Requisitos
+## Requisitos
 
 * Python 3
 * Acesso ao banco PostgreSQL
+
+---
+
+## Autor/Supervisão
+
+Felippe Santuzzi
+    Professor: Orlando Saraiva
+
+---
+
+## Status
+
+Mini projeto acadêmico concluído.
