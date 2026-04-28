@@ -1,35 +1,31 @@
 # Mini Projeto 2 - LGPD
 
-## Descrição
-
+# Descrição
 Projeto em Python que acessa um banco PostgreSQL, aplica anonimização de dados e gera arquivos CSV.
 
 ---
 
-## Tecnologias
-
+# Tecnologias
 * Python 3
 * SQLAlchemy
 * psycopg2
 
 ---
 
-## Execução
+# Execução
 
-### 1. Clonar repositório
+1. Clonar repositório
 
-```bash
 git clone <url-do-repositorio>
 cd Mini-Projeto-2
-```
 
-### 2. Criar ambiente virtual
 
-```bash
+# 2. Criar ambiente virtual
+
 python3 -m venv venv
-```
 
-### 3. Ativar ambiente
+
+# 3. Ativar ambiente
 
 Mac/Linux:
 
@@ -43,55 +39,53 @@ Windows:
 venv\Scripts\activate
 ```
 
-### 4. Instalar dependências
+# 4. Instalar dependências
 
-```bash
 pip install -r requirements.txt
-```
 
-### 5. Executar
 
-```bash
+# 5. Executar
+
 python LGPD.py
-```
+
 
 ---
 
 ## Funcionalidades
 
-### Atividade 2
+## Atividade 2
 
 * Anonimiza dados (nome, cpf, email, telefone)
 * Gera arquivos CSV por ano de nascimento
 
-### Atividade 3
+## Atividade 3
 
 * Gera arquivo `todos.csv`
 * Contém nome e cpf sem anonimização
 
 ---
 
-## Logs
+### Logs
 
 * Arquivo `execucao.log`
 * Registra tempo de execução das atividades
 
 ---
 
-## Estrutura
+#### Estrutura
 
-```
+
 Mini-Projeto-2/
 ├── LGPD.py
 ├── requirements.txt
 ├── README.md
 ├── execucao.log
 └── *.csv
-```
+
 
 ---
 
-## Requisitos
+##### Requisitos
 
 * Python 3
 * Acesso ao banco PostgreSQL
